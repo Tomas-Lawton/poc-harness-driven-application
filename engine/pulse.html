@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>$title</title>
+    <style>
+      /* Page */
+      body {
+        margin: 0;
+        padding: 24px 0;
+        background: $brand;
+      }
+      .wrap {
+        width: 760px;
+        max-width: 100%;
+        margin: 0 auto;
+        background: $bg;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .wrap td,
+      .wrap div,
+      .wrap span,
+      .wrap li {
+        font-family:
+          -apple-system,
+          BlinkMacSystemFont,
+          Segoe UI,
+          Roboto,
+          Arial,
+          Helvetica,
+          sans-serif;
+      }
+      a {
+        color: $brand;
+      }
+      .hide {
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      /* Header */
+      .hd {
+        background: $brand;
+        padding: 28px;
+      }
+      .logo {
+        display: block;
+        border-radius: 14px;
+      }
+      .prod {
+        font-size: 13px;
+        font-weight: 800;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+      }
+      .name {
+        font-size: 26px;
+        font-weight: 700;
+        color: #fff;
+        margin-top: 2px;
+      }
+      .when {
+        font-size: 13px;
+        color: #fff;
+        margin-top: 4px;
+      }
+      .headline {
+        padding: 22px 24px 4px;
+        font-size: 18px;
+        line-height: 1.5;
+        color: $ink;
+      }
+
+      /* Layout */
+      .pad {
+        padding: 8px 24px;
+      }
+      .top {
+        padding: 14px 24px 0;
+      }
+      .sec {
+        padding: 30px 24px 6px;
+      }
+      .sectitle {
+        font-size: 22px;
+        font-weight: 800;
+        color: $brand;
+      }
+      .rule {
+        width: 40px;
+        height: 3px;
+        background: $accent;
+        border-radius: 2px;
+        margin-top: 6px;
+      }
+      .secsub {
+        font-size: 13px;
+        color: $muted;
+        margin-top: 4px;
+      }
+      .box {
+        background: #fff;
+        border: 1px solid $line;
+        border-radius: 12px;
+        padding: 16px 18px;
+      }
+      .watch {
+        border-left: 4px solid #b91c1c;
+      }
+      .foot {
+        padding: 22px 24px 26px;
+        font-size: 12px;
+        line-height: 1.65;
+        color: $muted;
+      }
+
+      /* Text */
+      .title {
+        font-size: 17px;
+        font-weight: 700;
+        color: $ink;
+        margin-top: 4px;
+      }
+      .text {
+        font-size: 14px;
+        line-height: 1.55;
+        color: $ink;
+        margin-top: 8px;
+      }
+      .small {
+        font-size: 12px;
+        color: $muted;
+        margin-top: 3px;
+      }
+      .tiny {
+        font-size: 11px;
+        color: $muted;
+      }
+      .lbl {
+        font-size: 11px;
+        color: $muted;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 2px;
+      }
+      .note {
+        font-size: 12px;
+        color: $muted;
+        margin-top: 10px;
+        font-style: italic;
+      }
+      .off {
+        color: $line;
+      }
+      .accent {
+        color: $accent;
+      }
+
+      /* Headline numbers */
+      .stats {
+        background: #fff;
+        border: 1px solid $line;
+        border-radius: 12px;
+      }
+      .stat {
+        padding: 14px 8px;
+        text-align: center;
+      }
+      .num {
+        font-size: 26px;
+        font-weight: 800;
+        color: $brand;
+      }
+
+      /* Charts */
+      .chart {
+        font-size: 13px;
+        font-weight: 600;
+        color: $ink;
+        margin-bottom: 8px;
+      }
+      .cell {
+        font-size: 12px;
+        color: $ink;
+        padding: 4px 8px 4px 0;
+      }
+      .bar {
+        height: 14px;
+        border-radius: 7px;
+      }
+      .vbar {
+        background: $brand;
+        background-image: linear-gradient(180deg, $brand2, $brand);
+        border-radius: 6px 6px 0 0;
+      }
+
+      /* Pills, tags and badges */
+      .pill {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        border: 1px solid;
+        border-radius: 999px;
+        padding: 2px 9px;
+        margin: 0 6px 4px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .solid {
+        color: #fff;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        background: #fff;
+        border: 1px solid;
+        border-radius: 999px;
+        padding: 1px 8px;
+        margin-right: 6px;
+      }
+      .count {
+        margin-right: 8px;
+      }
+      .badge {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        background: $accent;
+        color: #fff;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 30px;
+        text-align: center;
+      }
+
+      /* Quotes, citations and evidence */
+      .quote {
+        background: $bg;
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin: 10px 0 0;
+      }
+      .cite {
+        font-size: 10px;
+      }
+      .cite a {
+        text-decoration: none;
+      }
+      .ev {
+        font-size: 12px;
+        line-height: 1.5;
+        color: $ink;
+        padding: 6px 0;
+        border-top: 1px solid $line;
+      }
+
+      /* Phones: stack the numbers and the two-column boxes */
+      @media (max-width: 620px) {
+        .wrap {
+          width: 100% !important;
+        }
+        .stat {
+          display: block !important;
+          width: 100% !important;
+          border-bottom: 1px solid $line;
+        }
+        .col {
+          display: block !important;
+          width: auto !important;
+          margin-bottom: 12px;
+        }
+        .gap {
+          display: none !important;
+        }
+      }
+    </style>
+    <style>
+      /* Theme kinds, in the profile's colours, and connections */
+      .k-problem {
+        border-left: 4px solid $problem;
+      }
+      .b-problem,
+      .p-problem {
+        background: $problem;
+        border-color: $problem;
+      }
+      .c-problem {
+        color: $problem;
+      }
+      .k-request {
+        border-left: 4px solid $request;
+      }
+      .b-request,
+      .p-request {
+        background: $request;
+        border-color: $request;
+      }
+      .c-request {
+        color: $request;
+      }
+      .k-praise {
+        border-left: 4px solid $praise;
+      }
+      .b-praise,
+      .p-praise {
+        background: $praise;
+        border-color: $praise;
+      }
+      .c-praise {
+        color: $praise;
+      }
+      .k-question {
+        border-left: 4px solid $question;
+      }
+      .b-question,
+      .p-question {
+        background: $question;
+        border-color: $question;
+      }
+      .c-question {
+        color: $question;
+      }
+      .s0 {
+        color: #334155;
+        border-color: #334155;
+      }
+      .s1 {
+        color: #0f766e;
+        border-color: #0f766e;
+      }
+      .s2 {
+        color: #9333ea;
+        border-color: #9333ea;
+      }
+      .s3 {
+        color: #b45309;
+        border-color: #b45309;
+      }
+      .s4 {
+        color: #be123c;
+        border-color: #be123c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hide">$preheader</div>
+    <table role="presentation" class="wrap" width="760" align="center" cellpadding="0" cellspacing="0">
+      $body
+    </table>
+  </body>
+</html>

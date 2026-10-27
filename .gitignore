@@ -1,0 +1,10 @@
+# runs, profiles' secrets and local installs
+runs/
+profiles/
+.env
+*client_secret*.json
+application_default_credentials.json
+.venv/
+__pycache__/
+*.pyc
+.ruff_cache/

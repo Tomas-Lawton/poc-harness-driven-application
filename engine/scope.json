@@ -1,0 +1,100 @@
+{
+  "_about": "The use case scope: what a Customer Pulse is, the general kinds of connection it supports, the shape every connection must deliver, and the most it may ever do. Same for every user. During setup, each user's specific connections are recorded in profiles/<key>/user_scope.json, which can only narrow this file, never widen it. Change only by a deliberate design decision.",
+  "useCase": "Customer Pulse: what customers said, what changed and what to do about it, for one reader, from the connections that reader approved, over the time window they chose.",
+  "allowedActions": [
+    "read the connections in the user scope, through engine/steps/collect.py only",
+    "write files inside the run folder",
+    "draft tickets for the team to file (never file them)",
+    "email the pulse to the recipient in the user scope, through engine/steps/send.py, after every check passes"
+  ],
+  "itemShape": {
+    "_about": "Every connection delivers feedback items in this shape, so every step after collection is the same for every user. A user scope maps its own column names onto these fields.",
+    "required": [
+      "date",
+      "text"
+    ],
+    "optional": [
+      "id",
+      "title",
+      "rating",
+      "url"
+    ],
+    "added": [
+      "source",
+      "sourceLabel",
+      "connection",
+      "private"
+    ]
+  },
+  "connectionTypes": {
+    "service": {
+      "label": "Online service: any JSON API, public or with a read only key (helpdesks, issue trackers, survey and review tools)",
+      "access": "read only: plain GET requests over HTTPS to the hosts approved in the user scope; a key, if needed, is read from the local .env by name",
+      "needs": [
+        "which service",
+        "its feed or API address (the agent can usually work this out)",
+        "a read only key, if the service needs one"
+      ],
+      "reader": "engine/read/service.py",
+      "authTypes": [
+        "bearer",
+        "client_credentials"
+      ],
+      "maxPages": 20
+    },
+    "warehouse": {
+      "label": "Internal warehouse or data store: a table or view where your company already collects feedback (support tickets, surveys, in-app feedback)",
+      "access": "read only, one named table or view",
+      "needs": [
+        "the project, dataset and table or view",
+        "which columns hold the date and the text (and optionally an id, title, rating and link)",
+        "a read only identity that can see only that dataset"
+      ],
+      "reader": "engine/read/bigquery.py",
+      "private": true
+    },
+    "file": {
+      "label": "File: an export from any tool (a helpdesk, a survey tool, Google Play Console)",
+      "access": "read only, one file inside the profile folder",
+      "needs": [
+        "the file, saved inside the profile folder",
+        "which columns hold the date and the text (and optionally an id, title, rating and link)",
+        "whether it is private"
+      ],
+      "reader": "engine/read/csv_file.py"
+    }
+  },
+  "collect": {
+    "maxDays": 31,
+    "maxItemsPerSource": 2000,
+    "maxItems": 500,
+    "timeoutSeconds": 30,
+    "warehouseMaxBytesBilled": 1000000000
+  },
+  "themes": {
+    "maxThemes": 8,
+    "keepScore": 4,
+    "actionScore": 6,
+    "minEvidence": 2,
+    "maxQuotesPerTheme": 3,
+    "maxWatch": 3,
+    "watchMaxShare": 5,
+    "minQuoteWords": 4,
+    "maxUntaggedShare": 25,
+    "maxImpact": 3,
+    "maxActionability": 2,
+    "watchMinImpact": 2,
+    "breadth": [[20, 3], [10, 2], [4, 1]],
+    "maxActions": 3,
+    "maxWatchQuotes": 2,
+    "questions": [2, 3]
+  },
+  "send": {
+    "maxRecipients": 1
+  },
+  "cluster": {
+    "k": 6,
+    "readingChunk": 100,
+    "textChars": 300
+  }
+}
