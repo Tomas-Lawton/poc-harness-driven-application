@@ -74,17 +74,17 @@ flowchart LR
 
 **Left to the agent:** the judgement (which themes matter, and whether a summary fairly reflects the items it cites) and following the skill. The harness can run commands, so it could reach a service or send mail without the scripts. The skill tells it not to; your harness's sandbox and permissions are what actually stop it.
 
-**Checked by a second look:** a fresh sub-agent that sees only each claim and the items it cites confirms the claim is supported. This is required before a scheduled run sends. In a conversation it's recommended, and without a sub-agent the harness checks its own writing.
+**Checked by an independent verifier:** some things can't be checked in code, like whether a summary fairly reflects the items it cites, and the model that wrote it is biased. When a pulse runs in chat, a person is there to sanity-check it; before a scheduled run sends, a fresh sub-agent (or independent model) that sees only each claim and its cited items must confirm every claim is supported.
 
 ## Checks and tests
 
-**Checks test the agent, every run.** They're part of the product: the checks above end every step and catch the agent's mistakes, live, on real data.
+**Checks validate the model, every run, and the harness is the recovery loop.** When a check fails, the script exits with a plain-English fix message and the harness tries again until its work passes, with no retry logic in code.
 
-**Tests test the checks, whenever the code changes.** They're for the developer. They feed the checks deliberately broken work (an invented quote, a guessed number, an uncited sentence, a connection outside the user scope) and confirm each one is caught. Run them with `pytest`.
+**Tests validate the checks, whenever the code changes.** They're for the developer: they feed the checks deliberately broken model output (an invented quote, a guessed number, an uncited sentence, a connection outside the user scope) and confirm each one is caught. Run them with `pytest`.
 
 ## Known limits
 
-**No evals yet.** The checks prove each pulse is grounded (quotes are real, numbers are counted, claims are cited), not that it is good: that the themes are the right ones, the actions sensible and the summaries fair. This proof of concept was built with fictional clients and synthetic feedback. A real deployment needs evals for the judgement code can't check: a fixed feedback set labelled by people, run headless whenever the skill or model changes, scoring how closely the agent's tags match the labels, how many claims the second look confirms, and whether the main themes stay the same across runs and models.
+**No evals yet.** The checks prove each pulse is grounded (quotes are real, numbers are counted, claims are cited), not that it is good: that the themes are the right ones, the actions sensible and the summaries fair. This proof of concept was built with fictional clients and synthetic feedback. A real deployment needs evals for the judgement code can't check: a fixed feedback set labelled by people, run headless whenever the skill or model changes, scoring how closely the agent's tags match the labels, how many claims the verifier confirms, and whether the main themes stay the same across runs and models.
 
 **Tested in one harness so far.** It is written for any harness that can run commands, but it has only been run end to end in one.
 
